@@ -19,6 +19,10 @@ const CourseSchema = new Schema(
       type: String,
       unique: true,
     },
+    category: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Category',
+    },
   },
   { timestamps: true }
 );
@@ -27,7 +31,7 @@ CourseSchema.pre('validate', function (next) {
   this.slug = slugify(this.name, {
     lower: true,
     strict: true,
-    replacement: '-'
+    replacement: '-',
   });
   next();
 });
