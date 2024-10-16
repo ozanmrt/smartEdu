@@ -30,7 +30,7 @@ exports.loginUser = async (req, res) => {
         // SESSİON
         req.session.userID = user._id;
 
-        return res.status(200).redirect('/');
+        return res.status(200).redirect('/users/dashboard');
       } else {
         return res.status(400).send('Kullanıcı Adı veya Şifre Yanlış');
       }
@@ -48,11 +48,17 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-exports.logoutUser = async (req,res)=>{
-
-  req.session.destroy(()=>{
+exports.logoutUser = async (req, res) => {
+  req.session.destroy(() => {
     res.redirect('/');
   });
-  
+};
 
-}
+exports.getDashboardPage = async (req, res) => {
+  const user = await User.findById({ _id: req.session.userID });
+
+  res.status(200).render('dashboard', {
+    page_name: 'dashboard',
+    user,
+  });
+};
