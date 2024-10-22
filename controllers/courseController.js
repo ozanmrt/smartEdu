@@ -1,4 +1,3 @@
-const { query } = require('express');
 const Category = require('../models/Category');
 const Course = require('../models/Course');
 const User = require('../models/User');
@@ -31,22 +30,22 @@ exports.getAllCourses = async (req, res) => {
       }
     }
 
-    if(search){
+    if (search) {
       filter = { name: search };
     }
 
-
-    if(!search && !categorySlug) {
-      filter.name = "",
-      filter.category = null
+    if (!search && !categorySlug) {
+      (filter.name = ''), (filter.category = null);
     }
 
     const courses = await Course.find({
-      $or:[
-        {name: { $regex: '.*' + filter.name + '.*', $options: 'i'}},
-        {category: filter.category}
-      ]
-    }).sort('-createdAt').populate('user');
+      $or: [
+        { name: { $regex: '.*' + filter.name + '.*', $options: 'i' } },
+        { category: filter.category },
+      ],
+    })
+      .sort('-createdAt')
+      .populate('user');
     const categories = await Category.find();
 
     res
@@ -67,7 +66,9 @@ exports.getCourse = async (req, res) => {
       'user'
     );
     const categories = await Category.find();
-    res.status(200).render('course', { course, page_name: 'courses', user, categories });
+    res
+      .status(200)
+      .render('course', { course, page_name: 'courses', user, categories });
   } catch (error) {
     res.status(400).json({
       status: 'Fail',
@@ -78,7 +79,21 @@ exports.getCourse = async (req, res) => {
 
 exports.deleteCourse = async (req, res) => {
   try {
-    const course = await Course.findOneAndDelete({slug: req.params.slug});
+    const course = await Course.findOneAndDelete({ slug: req.params.slug });
+    
+    //req.flash("success", `${course.name} has been removed successfully`);
+    res.status(200).redirect('/users/dashboard');
+  } catch (error) {
+    res.status(400).json({
+      status: 'Fail',
+      error,
+    });
+  }
+};
+
+exports.updateCourse = async (req, res) => {
+  try {
+    const course = await Course.findOneAndUpdate({ slug: req.params.slug },req.body);
     //req.flash("success", `${course.name} has been removed successfully`);
     res.status(200).redirect('/users/dashboard');
   } catch (error) {
