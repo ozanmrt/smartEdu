@@ -16,7 +16,7 @@ Smart EDU is a dynamic, database-driven web application built using Node.js and 
 - **Postman Integration:** For testing API endpoints during development.
 - **Slugify:** Clean URLs for courses and categories.
 - **Development Tools:** Enhanced with Prettier for code formatting and Nodemon for automatic server reload during development.
-- 
+
 This project exemplifies how to build a scalable education platform with full admin control, user management, and course handling, all while following best practices in web development.
 
 ![1](https://github.com/user-attachments/assets/d912d839-27f8-419b-8355-ffe10925d7af)
