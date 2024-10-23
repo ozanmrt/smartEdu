@@ -1,6 +1,6 @@
 # Smart EDU
 
-Smart EDU is a dynamic, database-driven web application built using Node.js and Express.js, with a focus on course management. The application utilizes MongoDB and Mongoose for efficient data handling and provides full CRUD functionality. The project is structured according to the MVC architecture, ensuring clean separation of concerns and maintainability.
+Smart EDU is a dynamic, database-driven web application built using **Node.js** and **Express.js**, with a focus on course management. The application utilizes **MongoDB** and **Mongoose** for efficient data handling and provides full **CRUD** functionality. The project is structured according to the **MVC architecture**, ensuring clean separation of concerns and maintainability.
 
 
 ## Key features include:
